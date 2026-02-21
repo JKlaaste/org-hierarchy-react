@@ -168,10 +168,30 @@ export const LAYOUT_SPACING = {
 
 ## Privacy & Security
 
-- All data processing happens entirely in your browser
-- Excel files are never uploaded to any server
-- No data is stored or transmitted
+### Data Protection
+- ✅ **Client-Side Processing**: All Excel files are processed entirely in your browser
+- ✅ **No Server Uploads**: No data is sent to any server or external service
+- ✅ **No Persistence**: Data is cleared when you refresh or close the page
+- ✅ **No Tracking**: No analytics or telemetry
+
+### ⚠️ Important Privacy Notice
+
+**Local/Development Use:**
+- Safe to use with sensitive employee data
+- No data leaves your computer
+
+**GitHub Pages/Public Deployment:**
+- ⚠️ Anyone with the URL can view the org chart
+- **Do not deploy to public URLs with sensitive organizational data**
+- Consider using behind authentication for sensitive employee information
+- If you must use publicly, consider anonymizing employee details
+
+### Best Practices
+- Use locally or behind corporate authentication for sensitive data
+- Clear browser history after viewing sensitive org charts on shared computers
+- Do not share public deployment URLs with sensitive employee data
+- Export/share org charts through secure channels, not via public links
 
 ---
 
-**Created for:** Accenture Digital Factory
+**Created for:** Digital Factory
