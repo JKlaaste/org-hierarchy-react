@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Background, Controls, MiniMap, useReactFlow } from '@xyflow/react';
 import { ANIMATION_CONFIG } from '../org/config/animationConfig';
 import type { Node } from '@xyflow/react';
+import type { OrgNodeData } from '../org/types';
 
 interface FlowContentProps {
-  nodes: Node[];
+  nodes: Node<OrgNodeData>[];
   hasGraph: boolean;
-  minimapNodeColor: (node: any) => string;
+  minimapNodeColor: (node: Node<OrgNodeData>) => string;
 }
 
 /**

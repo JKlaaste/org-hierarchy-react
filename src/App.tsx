@@ -3,6 +3,9 @@ import {
   ReactFlow,
   useEdgesState,
   useNodesState,
+  type Edge,
+  type Node,
+  type NodeProps,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -13,6 +16,9 @@ import { FlowContent } from './components/FlowContent';
 
 // Node components
 import { PersonNode, UnitNode, ProjectGroupNode } from './org/nodes';
+
+// Types
+import type { OrgNodeData } from './org/types';
 
 // Custom hooks
 import { useFileUpload } from './hooks/useFileUpload';
@@ -30,8 +36,8 @@ export default function App() {
   const [showHelp, setShowHelp] = useState(false);
 
   // Graph State
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState<Node<OrgNodeData>>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
 
   // Collapse State
   const { collapsedNodes, toggleCollapsed } = useCollapseState();
@@ -41,8 +47,8 @@ export default function App() {
 
   // File upload handler
   const { handleFileUpload } = useFileUpload((nodes, edges) => {
-    setNodes(nodes as any);
-    setEdges(edges as any);
+    setNodes(nodes);
+    setEdges(edges);
   });
 
   // Handle file input
@@ -66,14 +72,14 @@ export default function App() {
   );
 
   // Minimap node coloring
-  const minimapNodeColor = useCallback((n: any) => {
+  const minimapNodeColor = useCallback((n: Node<OrgNodeData>) => {
     return n.data?.kind === 'unit' ? '#0b5cab' : '#6e7781';
   }, []);
 
   // Node types with collapse support
   const nodeTypes = useMemo(
     () => ({
-      unitNode: (props: any) => (
+      unitNode: (props: NodeProps) => (
         <UnitNode {...props} collapsed={collapsedNodes} onToggleCollapse={toggleCollapsed} />
       ),
       personNode: PersonNode,
@@ -95,13 +101,12 @@ export default function App() {
       <HelpPanel isOpen={showHelp} onClose={() => setShowHelp(false)} />
 
       <div className="canvas">
-        <ReactFlow
+        <ReactFlow<Node<OrgNodeData>, Edge>
           nodes={filteredNodes}
           edges={filteredEdges}
           nodeTypes={nodeTypes}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
-          attribution={false}
         >
           <FlowContent
             nodes={filteredNodes}
