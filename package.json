@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "An interactive organizational chart visualization tool that converts Excel spreadsheets into beautiful, hierarchical org charts with collapsible nodes, project grouping, and animated cascade effects.",
-  "author": "jason.klaaste@accenture.com",
+  "author": "jason",
   "license": "UNLICENSED",
   "homepage": "https://github.com/JKlaaste/org-hierarchy-react",
   "keywords": [
